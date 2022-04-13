@@ -9,13 +9,13 @@ switch (page) {
     case "/anime.html":
         anime();
         break;
-    case "characters.html":
+    case "/characters.html":
         characters();
         break;
-    case "aot.html":
+    case "/aot.html":
         aot();
         break;
-    case "eren.html":
+    case "/eren.html":
         eren();
         break;
 }
@@ -48,7 +48,7 @@ function home() {
 
             // if the thumbnail.tag is anime, wrap the div in a link to the anime page
             if (thumbnail.tag === "anime") {
-                div.href = 'anime.html';
+                div.href = 'aot.html';
             } else if (thumbnail.tag === "character") {
                 div.href = 'eren.html';
             }
@@ -66,7 +66,7 @@ function home() {
             `;
 
             if (thumbnail.tag === "anime") {
-                div.href = 'anime.html';
+                div.href = 'aot.html';
             } else if (thumbnail.tag === "character") {
                 div.href = 'eren.html';
             }
@@ -75,6 +75,43 @@ function home() {
         });
     })
 
+}
+
+function anime() {
+    let anime = document.querySelector(".anime__wrapper");
+    fetchContent().then(data => {
+        let thumbnails = data.thumbnails;
+
+        // only get the thumbnails that are thumbnail.tag === anime
+        let thumbnailsFiltered = thumbnails.filter(thumbnail => thumbnail.tag === "anime");
+
+        // create a div for each thumbnail and add it to the recent section
+        thumbnailsFiltered.forEach(thumbnail => {
+            let div = document.createElement("a");
+            div.classList.add("thumbnail", "anime__thumbnail");
+            div.innerHTML = `
+            <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
+            <h3>${thumbnail.abbr}</h3>
+            `;
+            div.href = 'aot.html';
+            anime.appendChild(div);
+        });
+    })
+}
+
+function aot() {
+    let aotLogo = document.querySelector(".aot__logo"),
+        aotContent = document.querySelector(".aot__content");
+
+    fetchContent().then(data => {
+        let animeData = data.anime["Attack on Titan"];
+
+        // console log data.anime Attack on Titan
+        console.log(data.anime["Attack on Titan"]);
+
+        // set the body background-image to animeData.bck
+        document.querySelector(".aot__background").style.backgroundImage = `url(${animeData.bck})`;
+    })
 }
 
 async function fetchContent(){
