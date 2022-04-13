@@ -113,3 +113,66 @@ body {
 .anime__thumbnail h3 {
     font-size: 50px;
 }
+
+/* end of anime */
+
+/* start of aot */
+.aot__background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: brightness(0.7);
+}
+
+.aot__logo {
+    margin: 0 auto;
+    display: block;
+}
+
+.aot__btns {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 5% 0 3%;
+}
+
+.aot__btn {
+    background-color: rgba(17, 17, 17, 0.8);
+    color: white;
+    text-decoration: none;
+    padding: 4% 6%;
+    font-family: 'Barlow', sans-serif;
+    border-radius: 600px;
+}
+
+.aot__content {
+    width: 95%;
+    margin: 0 auto;
+    background-color: rgba(17, 17, 17, 0.8);
+    overflow-y: scroll;
+    height: 60vh;
+    border-radius: 25px;
+}
+
+.aot__content p {
+    color: white;
+    font-family: 'Barlow', sans-serif;
+    padding: 0 6%;
+    line-height: 130%;
+    margin: 7px 0;
+    font-size: 15px;
+}
+
+.aot__content p:first-child {
+    margin-top: 5%;
+}
+
+.aot__content p:last-child {
+    margin-bottom: 8%;
+}
