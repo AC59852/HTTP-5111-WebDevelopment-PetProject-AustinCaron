@@ -111,6 +111,16 @@ function aot() {
 
         // set the body background-image to animeData.bck
         document.querySelector(".aot__background").style.backgroundImage = `url(${animeData.bck})`;
+
+        aotLogo.src = animeData.logo;
+
+        // create a p tag for each item in animeData.landing_info and append it to aotContent
+        animeData.landing_info.forEach(item => {
+            let p = document.createElement("p");
+            p.classList.add("aot__para")
+            p.innerHTML = item.content;
+            aotContent.appendChild(p);
+        });
     })
 }
 
