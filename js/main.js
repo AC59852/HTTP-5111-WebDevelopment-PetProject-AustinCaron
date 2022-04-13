@@ -28,16 +28,19 @@ function home() {
     fetchContent().then(data => {
         let thumbnails = data.thumbnails;
 
+        // reverse the array so the most recent shows are at the top
+        thumbnails = thumbnails.reverse();
+
         // limit the number of thumbnails to 10
-        thumbnails = thumbnails.slice(0, 10);
+        let thumbnailsShuffled = thumbnails.slice(0, 10);
 
         // create a div for each thumbnail and shuffle the array
-        let shuffle = thumbnails.sort(() => 0.5 - Math.random());
+        let shuffle = thumbnailsShuffled.sort(() => 0.5 - Math.random());
 
         // create a div for each thumbnail
         shuffle.forEach(thumbnail => {
-            let div = document.createElement("div");
-            div.classList.add("explore__thumbnail");
+            let div = document.createElement("a");
+            div.classList.add("thumbnail", "explore__thumbnail");
             div.innerHTML = `
             <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
             <h3>${thumbnail.abbr}</h3>
@@ -45,33 +48,31 @@ function home() {
 
             // if the thumbnail.tag is anime, wrap the div in a link to the anime page
             if (thumbnail.tag === "anime") {
-                div.innerHTML = `
-                <a href="aot.html">
-                    ${div.innerHTML}
-                </a>
-                `;
+                div.href = 'anime.html';
             } else if (thumbnail.tag === "character") {
-                div.innerHTML = `
-                <a href="eren.html">
-                    ${div.innerHTML}
-                </a>
-                `;
+                div.href = 'eren.html';
             }
 
             explore.appendChild(div);
         });
 
         // create a div for each thumbnail and add it to the recent section
-        // thumbnails.forEach(thumbnail => {
-        //     let div = document.createElement("div");
-        //     div.classList.add("recent__thumbnail");
-        //     div.innerHTML = `
-        //     <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
-        //     <h3>${thumbnail.abbr}</h3>
-        //     `;
+        thumbnails.forEach(thumbnail => {
+            let div = document.createElement("a");
+            div.classList.add("thumbnail", "recent__thumbnail");
+            div.innerHTML = `
+            <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
+            <h3>${thumbnail.abbr}</h3>
+            `;
 
-        //     recent.appendChild(div);
-        // });
+            if (thumbnail.tag === "anime") {
+                div.href = 'anime.html';
+            } else if (thumbnail.tag === "character") {
+                div.href = 'eren.html';
+            }
+
+            recent.appendChild(div);
+        });
     })
 
 }
