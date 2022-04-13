@@ -82,3 +82,34 @@ body {
 .recent h2 {
     margin: 0 0 3%;
 }
+
+/* end of home page */
+
+
+/* start of anime page */
+.anime {
+    padding-bottom: 8%;
+}
+
+.anime__wrapper {
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: center;
+    gap: 13px;
+}
+
+.anime__thumbnail {
+    width: 170px;
+    height: 170px;
+    border-radius: 25px;
+}
+
+.anime__thumbnail img {
+    border-radius: 25px;
+}
+
+.anime__thumbnail h3 {
+    font-size: 50px;
+}
