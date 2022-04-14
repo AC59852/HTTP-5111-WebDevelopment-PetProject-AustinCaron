@@ -196,6 +196,8 @@ function characters() {
                 image.src = characterContent.card_img;
                 bio.innerHTML = characterContent.bio;
                 name.style.fontSize = characterContent.fontRatio + "px";
+
+                document.querySelector(".characters__bck").style.backgroundImage = `url(${characterArray[characterArray.indexOf(character)].card_bck})`;
             })
         });
     })
