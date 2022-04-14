@@ -1,6 +1,12 @@
 body {
-    height: 100vh;
     background-color: #111111;
+}
+
+.header {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 .home {
@@ -12,19 +18,19 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 25px;
 }
 
 .explore h2, .recent h2 {
     font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 28px;
+    font-size: 26px;
     color: white;
     margin: 5% 0 3% 5%;
 }
 
 .thumbnail {
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     position: relative;
     border-radius: 5px;
 }
@@ -175,4 +181,117 @@ body {
 
 .aot__content p:last-child {
     margin-bottom: 8%;
+}
+
+/* end of aot */
+
+/* start of characters */
+.characters__wrapper {
+    width: 90%;
+    margin: 5% auto 0;
+    position: relative;
+}
+
+.characters__wrapper img {
+    display: block;
+    width: 85%;
+    margin: 0 auto -20%;
+}
+
+.characters__bck {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    left: 0;
+    filter: blur(10px) brightness(0.7);
+    z-index: -1;
+}
+
+.characters__card {
+    color: white;
+    background: #111;
+    position: relative;
+    z-index: -1;
+    border-radius: 20px;
+}
+
+.characters__name {
+    font-family: 'IBM Plex Sans', sans-serif;
+    text-align: center;
+    padding: 0% 0;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.characters__bio {
+    font-family: 'Barlow', sans-serif;
+    width: 90%;
+    margin: 0 auto;
+    line-height: 130%;
+    font-size: 15px;
+}
+
+.characters__readMore {
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: space-between;
+    padding: 7% 0;
+}
+
+.characters__dots {
+    display: flex;
+    height: 10px;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.characters__dot {
+    width: 10px;
+    height: 10px;
+    border: solid 1px white;
+    border-radius: 50%;
+}
+
+.characters__link a {
+    text-align: center;
+    color: white;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.characters__readMore a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+}
+
+.dot--active {
+    background: white;
+    border: solid 1px transparent;
+}
+
+.characters__flair {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+    width: 25px;
+}
+
+.characters__flair--circle {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: white;
+    display: block;
 }

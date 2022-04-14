@@ -11,25 +11,43 @@
     <title>Toksan Wiki - Home</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <img src="./logo.png" alt="Toksan Wiki Logo">
+    <header class="header">
+        <nav class="nav">
+            <img src="./logo.png" class="nav__logo" alt="Toksan Wiki Logo">
             <!-- search bar -->
-            <form action="search.php" method="get">
+            <form action="" class="nav__search" method="get">
                 <input type="text" name="search" placeholder="Search For Anime">
             </form>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="anime.html">Anime</a></li>
+            <ul class="nav__list">
+                <li class="nav__item"><a href="index.html">Home</a></li>
+                <li class="nav__item"><a href="anime.html">Anime</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <section class="explore">
-            <div class="explore__wrapper"></div>
-        </section>
-        <section class="recent">
-            <div class="recent__wrapper"></div>
+        <section class="characters">
+            <span class="characters__bck"></span>
+            <div class="characters__wrapper">
+                <img src="" class="characters__image" alt="Card Photo of Attack on Titan Character">
+                <div class="characters__card">
+                    <h3 class="characters__name"></h3>
+                    <p class="characters__bio"></p>
+                    <div class="characters__readMore">
+                        <div class="characters__flair">
+                            <div class="characters__flair">
+                                <span class="characters__flair--circle"></span>
+                                <span class="characters__flair--circle"></span>
+                                <span class="characters__flair--circle"></span>
+                                <span class="characters__flair--circle"></span>
+                                <span class="characters__flair--circle"></span>
+                                <span class="characters__flair--circle"></span>
+                            </div>
+                        </div>
+                        <a href="eren.html">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="characters__dots"></div>
         </section>
     </main>
     <script src="./js/main.js"></script>
