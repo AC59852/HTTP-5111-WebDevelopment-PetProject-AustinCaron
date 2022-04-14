@@ -2,8 +2,12 @@
 // if the page is home, run the home function
 
 let page = window.location.pathname;
+console.log(page);
 switch (page) {
     case "/index.html":
+        home();
+        break;
+    case "/":
         home();
         break;
     case "/anime.html":
@@ -42,8 +46,8 @@ function home() {
             let div = document.createElement("a");
             div.classList.add("thumbnail", "explore__thumbnail");
             div.innerHTML = `
-            <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
-            <h3>${thumbnail.abbr}</h3>
+                <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
+                <h3>${thumbnail.abbr}</h3>
             `;
 
             // if the thumbnail.tag is anime, wrap the div in a link to the anime page
@@ -61,8 +65,8 @@ function home() {
             let div = document.createElement("a");
             div.classList.add("thumbnail", "recent__thumbnail");
             div.innerHTML = `
-            <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
-            <h3>${thumbnail.abbr}</h3>
+                <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
+                <h3>${thumbnail.abbr}</h3>
             `;
 
             if (thumbnail.tag === "anime") {
@@ -90,8 +94,8 @@ function anime() {
             let div = document.createElement("a");
             div.classList.add("thumbnail", "anime__thumbnail");
             div.innerHTML = `
-            <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
-            <h3>${thumbnail.abbr}</h3>
+                <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
+                <h3>${thumbnail.abbr}</h3>
             `;
             div.href = 'aot.html';
             anime.appendChild(div);
@@ -120,6 +124,64 @@ function aot() {
             p.classList.add("aot__para")
             p.innerHTML = item.content;
             aotContent.appendChild(p);
+        });
+    })
+}
+
+function characters() {
+    let name = document.querySelector(".characters__name"),
+        image = document.querySelector(".characters__image"),
+        bio = document.querySelector(".characters__bio");
+        dots = document.querySelector(".characters__dots");
+
+    fetchContent().then(data => {
+        let characterData = data.anime["Attack on Titan"].characters;
+        // store characterData in an array
+        let characterArray = Object.values(characterData);
+
+        // set the name, image and bio to the first character in the array
+        name.innerHTML = characterArray[0].first_name;
+        image.src = characterArray[0].card_img;
+        bio.innerHTML = characterArray[0].bio;
+        name.style.fontSize = characterArray[0].fontRatio + "px";
+
+        document.querySelector(".characters__bck").style.backgroundImage = `url(${characterArray[0].card_bck})`;
+
+        
+        // order the array by the character.id
+        characterArray.sort((a, b) => a.id - b.id);
+
+        // create a span for each character and add it to the dots section
+        characterArray.forEach(character => {
+            let span = document.createElement("span");
+            span.classList.add("characters__dot");
+            dots.appendChild(span);
+
+            // add class of dot--active to the first span
+            if (characterArray.indexOf(character) === 0) {
+                span.classList.add("dot--active");
+            }
+
+            // add an event listener to each span
+            span.addEventListener("click", () => {
+                // remove class of dot--active from all spans
+                let spans = document.querySelectorAll(".characters__dot");
+                spans.forEach(span => {
+                    span.classList.remove("dot--active");
+                });
+
+                console.log(characterArray.indexOf(character));
+
+                // add class of dot--active to the clicked span
+                span.classList.add("dot--active");
+
+                let characterContent = characterArray[characterArray.indexOf(character)];
+                
+                name.innerHTML = characterContent.first_name;
+                image.src = characterContent.card_img;
+                bio.innerHTML = characterContent.bio;
+                name.style.fontSize = characterContent.fontRatio + "px";
+            })
         });
     })
 }
