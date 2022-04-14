@@ -13,24 +13,40 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <img src="./logo.png" class="nav__logo" alt="Toksan Wiki Logo">
-            <!-- search bar -->
-            <form action="" class="nav__search" method="get">
-                <input type="text" name="search" placeholder="Search For Anime">
-            </form>
+            <div class="nav__icon">
+                <span class="nav__line"></span>
+                <span class="nav__line"></span>
+            </div>
             <ul class="nav__list">
+                <li class="nav__close"><span>X</span></li>
                 <li class="nav__item"><a href="index.html">Home</a></li>
                 <li class="nav__item"><a href="anime.html">Anime</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <section class="explore">
-            <div class="explore__wrapper"></div>
-        </section>
-        <section class="recent">
-            <div class="recent__wrapper"></div>
-        </section>
+        <article class="eren">
+            <section class="eren__hero">
+                <img src="" class="eren__heroImg" alt="Character Hero image">
+                <img src=""  class="eren__profile" alt="Character Profile Image">
+                <div class="eren__name">
+                    <h1 class="eren__firstName"></h1>
+                    <h2 class="eren__lastName"></h2>
+                </div>
+            </section>
+            <section class="eren__basicInfo"></section>
+            <section class="eren__wrapper">
+                <ul class="eren__nav eren__nav--main">
+                    <li class="eren__navItem"><h3>Timeline</h3></li>
+                    <li class="eren__navItem"><h3>Relationships</h3></li>
+                    <li class="eren__navItem"><h3>Key Moments</h3></li>
+                    <li class="eren__navItem"><h3>Skills</h3></li>
+                    <li class="eren__navItem"><h3>More</h3></li>
+                </ul>
+                <ul class="eren__nav eren__nav--small"></ul>
+                <div class="eren__content"></div>
+            </section>
+        </article>
     </main>
     <script src="./js/main.js"></script>
 </body>

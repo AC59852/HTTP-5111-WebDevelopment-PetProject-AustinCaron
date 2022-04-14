@@ -13,13 +13,18 @@
 </head>
 <body>
     <header class="header">
+        <img src="./images/toksan-wiki-logo.png" class="nav__logo" alt="Toksan Wiki Logo">
+        <!-- search bar -->
+        <form action="" class="nav__search" method="get">
+            <input type="text" name="search" placeholder="Search For Anime">
+        </form>
         <nav class="nav">
-            <img src="./logo.png" class="nav__logo" alt="Toksan Wiki Logo">
-            <!-- search bar -->
-            <form action="" class="nav__search" method="get">
-                <input type="text" name="search" placeholder="Search For Anime">
-            </form>
+            <div class="nav__icon">
+                <span class="nav__line"></span>
+                <span class="nav__line"></span>
+            </div>
             <ul class="nav__list">
+                <li class="nav__close"><span>X</span></li>
                 <li class="nav__item"><a href="index.html">Home</a></li>
                 <li class="nav__item"><a href="anime.html">Anime</a></li>
             </ul>
