@@ -46,8 +46,8 @@ function home() {
             let div = document.createElement("a");
             div.classList.add("thumbnail", "explore__thumbnail");
             div.innerHTML = `
-            <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
-            <h3>${thumbnail.abbr}</h3>
+                <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
+                <h3>${thumbnail.abbr}</h3>
             `;
 
             // if the thumbnail.tag is anime, wrap the div in a link to the anime page
@@ -65,8 +65,8 @@ function home() {
             let div = document.createElement("a");
             div.classList.add("thumbnail", "recent__thumbnail");
             div.innerHTML = `
-            <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
-            <h3>${thumbnail.abbr}</h3>
+                <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
+                <h3>${thumbnail.abbr}</h3>
             `;
 
             if (thumbnail.tag === "anime") {
@@ -94,8 +94,8 @@ function anime() {
             let div = document.createElement("a");
             div.classList.add("thumbnail", "anime__thumbnail");
             div.innerHTML = `
-            <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
-            <h3>${thumbnail.abbr}</h3>
+                <img src="${thumbnail.icon}" alt="${thumbnail.abbr}">
+                <h3>${thumbnail.abbr}</h3>
             `;
             div.href = 'aot.html';
             anime.appendChild(div);
