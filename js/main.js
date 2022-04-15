@@ -50,8 +50,12 @@ function home() {
         // reverse the array so the most recent shows are at the top
         thumbnails = thumbnails.reverse();
 
-        // limit the number of thumbnails to 10
-        let thumbnailsShuffled = thumbnails.slice(0, 10);
+        // limit the number of thumbnails to 10 if the window is less than 1366px
+        if(window.innerWidth < 1366) {
+            thumbnailsShuffled = thumbnails.slice(0, 10);
+        } else {
+            thumbnailsShuffled = thumbnails.slice(0, 12);
+        }
 
         // create a div for each thumbnail and shuffle the array
         let shuffle = thumbnailsShuffled.sort(() => 0.5 - Math.random());
@@ -120,7 +124,8 @@ function anime() {
 
 function aot() {
     let aotLogo = document.querySelector(".aot__logo"),
-        aotContent = document.querySelector(".aot__content");
+        aotContent = document.querySelector(".aot__content"),
+        aotBck = document.querySelector(".aot__background");
 
     fetchContent().then(data => {
         let animeData = data.anime["Attack on Titan"];
@@ -129,8 +134,12 @@ function aot() {
         console.log(data.anime["Attack on Titan"]);
 
         // set the body background-image to animeData.bck
-        document.querySelector(".aot__background").style.backgroundImage = `url(${animeData.bck})`;
 
+        if(window.innerWidth < 1366) {
+            aotBck.style.backgroundImage = `url(${animeData.bck})`;
+        } else {
+            aotBck.style.backgroundImage = `url(${animeData.bck_full})`;
+        }
         aotLogo.src = animeData.logo;
 
         // create a p tag for each item in animeData.landing_info and append it to aotContent
@@ -158,7 +167,11 @@ function characters() {
         name.innerHTML = characterArray[0].first_name;
         image.src = characterArray[0].card_img;
         bio.innerHTML = characterArray[0].bio;
-        name.style.fontSize = characterArray[0].fontRatio + "px";
+        if(window.innerWidth < 1366) {
+            name.style.fontSize = characterArray[0].fontRatio + "px";
+        } else {
+            name.style.fontSize = characterArray[0].fontRatio * 1.3 + "px";
+        }
 
         document.querySelector(".characters__bck").style.backgroundImage = `url(${characterArray[0].card_bck})`;
 
@@ -195,7 +208,12 @@ function characters() {
                 name.innerHTML = characterContent.first_name;
                 image.src = characterContent.card_img;
                 bio.innerHTML = characterContent.bio;
-                name.style.fontSize = characterContent.fontRatio + "px";
+
+                if(window.innerWidth < 1366) {
+                    name.style.fontSize = characterContent.fontRatio + "px";
+                } else {
+                    name.style.fontSize = characterContent.fontRatio * 1.2 + "px";
+                }
 
                 document.querySelector(".characters__bck").style.backgroundImage = `url(${characterArray[characterArray.indexOf(character)].card_bck})`;
             })

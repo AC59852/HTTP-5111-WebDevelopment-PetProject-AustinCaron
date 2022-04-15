@@ -75,7 +75,7 @@ body {
 }
 
 .nav__search input {
-    width: 100%;
+    width: min(100%, 380px);
     padding: 15px 0;
     background-color: #212121;
     border: none;
@@ -98,6 +98,7 @@ body {
 .home {
     width: 95%;
     margin: 0 auto;
+    max-width: 1400px;
 }
 
 .explore__wrapper {
@@ -119,6 +120,7 @@ body {
     height: auto;
     position: relative;
     border-radius: 5px;
+    overflow: hidden;
 }
 
 .thumbnail::after {
@@ -133,6 +135,11 @@ body {
     filter: brightness(0.6);
     border-radius: 5px;
     z-index: -1;
+    transition: transform 0.25s ease-in-out;
+}
+
+.thumbnail:hover img{ 
+    transform: scale(1.1); 
 }
 
 .thumbnail h3 {
@@ -191,6 +198,7 @@ body {
 
 .anime__wrapper {
     width: 95%;
+    max-width: 805px;
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
@@ -199,9 +207,20 @@ body {
 }
 
 .anime__thumbnail {
-    width: min(46%, 180px);
+    width: min(46%, 200px);
     border-radius: 25px;
+    overflow: hidden;
 }
+
+.anime__thumbnail img {
+    transition: transform 0.25s ease-in-out;
+}
+
+.anime__thumbnail:hover img{ 
+    transform: scale(1.1); 
+}
+
+.anime__thumbnail:last-child { display: none; }
 
 .anime__thumbnail img {
     border-radius: 25px;
@@ -245,6 +264,7 @@ body {
     text-decoration: none;
     padding: 3% 8% 4%;
     font-family: 'Barlow', sans-serif;
+    font-weight: Bold;
     border-radius: 600px;
 }
 
@@ -327,6 +347,8 @@ body {
     margin: 0 auto;
     line-height: 130%;
     font-size: 15px;
+    overflow-y: auto;
+    height: 90%;
 }
 
 .characters__readMore {
@@ -391,14 +413,161 @@ body {
     display: block;
 }
 
-@media screen and (min-width: 1024px) {
-    .explore__wrapper, .recent__wrapper {
-        max-width: 1100px;
+@media screen and (min-width: 1100px) {
+    .header {
+        width: min(90%, 1407px);
+        flex-direction: row;
+        margin: 2% auto;
+        justify-content: flex-end;
+        gap: 0;
+        flex: 1 0 auto;
+    }
+
+    .header--noLogo { justify-content: space-between; }
+
+    /* .nav__search input {
+        position: absolute;
+        top: 3%;
+        left: 50%;
+        transform: translateX(-50%);
+    } */
+
+    .nav { width: auto; }
+
+    .nav__logo {
+        width: 220px;
+    }
+
+    .nav__icon { display: none; }
+
+    .nav__close { display: none; }
+
+    .nav__list {
+        display: flex;
+        flex-direction: row;
+        position: initial;
+        width: auto;
+        height: auto;
+        background: transparent;
+        gap: 30px;
+    }
+
+    .nav__item a { font-size: 18px; }
+
+    .recent { 
+        width: 86%; 
+        margin: 5% auto;
+        padding-bottom: 0;
+    }
+
+    .explore h2 { 
+        margin-bottom: 2%;
+        margin-left: 7%; 
+    }
+
+    .recent h2 { margin-bottom: 2%; }
+
+    .anime {
+        padding: 0;
+        margin: 5% auto;
+    }
+
+    .anime__thumbnail:last-child { display: block; }
+
+    .anime__wrapper { 
+        gap: 30px; 
+    }
+
+    .aot__btns {
+        position: absolute;
+        flex-direction: column;
+        right: 5%;
+        text-align: right;
+    }
+
+    .aot__btn {
+        padding: 0;
+        background: transparent;
+        position: relative;
+        font-size: 18px;
+    }
+
+    .aot__btn::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translate(130%, -50%);
+        right: 0;
+        width: 40px;
+        height: 2px;
+        background: rgba(255, 255, 255, 1);
+    }
+
+    .aot__logo { 
+        width: min(33%, 560px);
+        margin: 0 7%;
+    }
+
+    .aot__content, .characters__wrapper {
+        width: 480px;
+        margin: 2% 5% 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .aot__content, .characters__card {
+        max-height: 540px;
+    }
+
+    .aot__content {
+        height: 65vh;
+    }
+
+    .aot__content p:first-child, .aot__content p:last-child { margin: 0; }
+
+    .aot__content p {
+        margin: 6px 0 !important;
+        font-size: 16px;
+        line-height: 140%;
+    }
+
+    .characters__wrapper {
+        margin: -5% 5% 0;
+    }
+
+    .characters__card {
+        height: 53vh;
+        width: 90%;
         margin: 0 auto;
     }
 
-   .thumbnail {
-       width: min(16%, 180px);
-       height: auto;
-   } 
+    .characters__bio {
+        width: 85%;
+        line-height: 135%;
+        font-size: 18px;
+    }
+
+    .characters__readMore a {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .aot__content {
+        margin: 2% 8% 0;
+    }
+
+    .aot__content p {
+        font-size: 17px;
+        line-height: 150%;
+    }
+
+    .characters__wrapper {
+        margin-top: -3%;
+    }
+
+    .characters__bio {
+        width: 90%;
+    }
 }
