@@ -4,7 +4,10 @@
 let page = window.location.pathname,
     navIcon = document.querySelector(".nav__icon"),
     navMenu = document.querySelector(".nav__list"),
-    navClose = document.querySelector(".nav__close");
+    navClose = document.querySelector(".nav__close"),
+    // globalData stores the fetchContent data, so that it can be used in other functions
+    // without having to fetch it again
+    globalData;
 
     navIcon.addEventListener("click", () => {
         navMenu.classList.toggle("nav__list--active");
@@ -51,11 +54,7 @@ function home() {
         thumbnails = thumbnails.reverse();
 
         // limit the number of thumbnails to 10 if the window is less than 1366px
-        if(window.innerWidth < 1366) {
-            thumbnailsShuffled = thumbnails.slice(0, 10);
-        } else {
-            thumbnailsShuffled = thumbnails.slice(0, 12);
-        }
+        thumbnailsShuffled = thumbnails.slice(0, 10);
 
         // create a div for each thumbnail and shuffle the array
         let shuffle = thumbnailsShuffled.sort(() => 0.5 - Math.random());
@@ -130,16 +129,9 @@ function aot() {
     fetchContent().then(data => {
         let animeData = data.anime["Attack on Titan"];
 
-        // console log data.anime Attack on Titan
-        console.log(data.anime["Attack on Titan"]);
-
         // set the body background-image to animeData.bck
 
-        if(window.innerWidth < 1366) {
-            aotBck.style.backgroundImage = `url(${animeData.bck})`;
-        } else {
-            aotBck.style.backgroundImage = `url(${animeData.bck_full})`;
-        }
+        aotBck.style.backgroundImage = `url(${animeData.bck})`;
         aotLogo.src = animeData.logo;
 
         // create a p tag for each item in animeData.landing_info and append it to aotContent
@@ -167,11 +159,8 @@ function characters() {
         name.innerHTML = characterArray[0].first_name;
         image.src = characterArray[0].card_img;
         bio.innerHTML = characterArray[0].bio;
-        if(window.innerWidth < 1366) {
-            name.style.fontSize = characterArray[0].fontRatio + "px";
-        } else {
-            name.style.fontSize = characterArray[0].fontRatio * 1.3 + "px";
-        }
+
+        name.style.fontSize = characterArray[0].fontRatio + "px";
 
         document.querySelector(".characters__bck").style.backgroundImage = `url(${characterArray[0].card_bck})`;
 
@@ -198,8 +187,6 @@ function characters() {
                     span.classList.remove("dot--active");
                 });
 
-                console.log(characterArray.indexOf(character));
-
                 // add class of dot--active to the clicked span
                 span.classList.add("dot--active");
 
@@ -209,11 +196,7 @@ function characters() {
                 image.src = characterContent.card_img;
                 bio.innerHTML = characterContent.bio;
 
-                if(window.innerWidth < 1366) {
-                    name.style.fontSize = characterContent.fontRatio + "px";
-                } else {
-                    name.style.fontSize = characterContent.fontRatio * 1.2 + "px";
-                }
+                name.style.fontSize = characterContent.fontRatio + "px";
 
                 document.querySelector(".characters__bck").style.backgroundImage = `url(${characterArray[characterArray.indexOf(character)].card_bck})`;
             })
@@ -222,19 +205,21 @@ function characters() {
 }
 
 function eren() {
-    fetchContent().then(data => {
+    fetchContent().then(() => {
         let firstName = document.querySelector(".eren__firstName"),
             lastName = document.querySelector(".eren__lastName"),
-            hero = document.querySelector(".eren__heroImg"),
+            hero = document.querySelector(".eren__heroImg img"),
             profile = document.querySelector(".eren__profile"),
             basicInfo = document.querySelector(".eren__basicInfo");
 
-        let eren = data.anime["Attack on Titan"].characters["Eren Yeager"];
+        let eren = globalData.anime["Attack on Titan"].characters["Eren Yeager"];
 
         firstName.innerHTML = eren.first_name;
         lastName.innerHTML = eren.last_name;
 
-        hero.src = eren.imgs["hero_img"];
+        hero.src = eren.imgs["hero_img-mobile"];
+        firstName.style.fontSize = eren.fontRatio + "px";
+
         profile.src = eren.imgs["profile_img"];
 
         eren.basic_info.forEach(item => {
@@ -244,11 +229,26 @@ function eren() {
             <h4>${item.title}</h4>
             <p>${item.value}</p>
             `
+            if(item.title === 'age') {
+                div.innerHTML = `
+                <h4>${item.title}</h4>
+                <p>${item.value} Years Old</p>    
+                `
+            }
             basicInfo.appendChild(div);
         });
 
+        erenTimeline();
+
+        // give the first .eren__navItem class of navItem--active
+        document.querySelector(".eren__navItem").classList.add("navItem--active");
+
         document.querySelectorAll(".eren__navItem").forEach(item => {
             item.addEventListener("click", () =>{
+                // give the clicked item the class of navItem--active
+                document.querySelector(".navItem--active").classList.remove("navItem--active");
+                item.classList.add("navItem--active");
+
                 // get the text content of the clicked item
                 let content = item.textContent;
 
@@ -269,8 +269,7 @@ function eren() {
 }
 
 function erenTimeline() {
-    fetchContent().then(data => {
-        let eren = data.anime["Attack on Titan"].characters["Eren Yeager"],
+        let eren = globalData.anime["Attack on Titan"].characters["Eren Yeager"],
             erenTimeline = eren.details["timeline"],
             content = document.querySelector(".eren__content"),
             nav = document.querySelector(".eren__nav--small");
@@ -279,72 +278,112 @@ function erenTimeline() {
             content.innerHTML = "";
             nav.innerHTML = "";
 
-        eren.details["timeline"].forEach(item => {
+            erenTimeline[0]["events"].forEach(event => {
+                let para = document.createElement("p");
+                para.classList.add("eren__event");
+                para.innerHTML = event.details;
+
+                content.innerHTML = "";
+                content.appendChild(para);
+            })
+
+        erenTimeline.forEach(item => {
             let li = document.createElement("p");
-                li.classList.add("eren__year");
-                li.innerHTML = item.year
+                li.classList.add("eren__navItem", "eren__year");
+                li.innerHTML = item.year;
+
             nav.appendChild(li);
 
+            // give the year eren__year class of year--active
+            document.querySelector(".eren__year").classList.add("year--active");
+
             li.addEventListener("click", () => {
+                content.innerHTML = "";
+                
+                document.querySelector(".year--active").classList.remove("year--active");
+                li.classList.add("year--active");
+                
                 erenTimeline[erenTimeline.indexOf(item)]["events"].forEach(event => {
                     let para = document.createElement("p");
                     para.classList.add("eren__event");
-                    para.innerHTML = event.details
+                    para.innerHTML = event.details;
 
                     content.appendChild(para);
                 })
             })
         })
-    })
 }
 
 function erenRelationships() {
-    fetchContent().then(data => {
-        let eren = data.anime["Attack on Titan"].characters["Eren Yeager"],
+        let eren = globalData.anime["Attack on Titan"].characters["Eren Yeager"],
             erenRelationships = eren.details["relationships"],
             content = document.querySelector(".eren__content"),
             nav = document.querySelector(".eren__nav--small");
 
-            // clear the content div
-            content.innerHTML = "";
-            nav.innerHTML = "";
+        // clear the content div
+        content.innerHTML = "";
+        nav.innerHTML = "";
 
-        eren.details["relationships"].forEach(item => {
+        var div = document.createElement("div"),
+            relContent = document.createElement("div"),
+            relationship = erenRelationships[0];
+
+        div.classList.add("eren__relationship");
+        relContent.classList.add("eren__relationshipContent");
+
+        div.innerHTML = `
+            <img src="${relationship.image}" alt="Image of Eren and ${relationship.name}">
+        `
+
+        relationship.content.forEach(relDetails => {
+            let relPara = document.createElement("p");
+            relPara.innerHTML = relDetails.details;
+
+            relContent.appendChild(relPara);
+        })
+        
+        content.appendChild(div);
+        div.appendChild(relContent);
+
+        erenRelationships.forEach(item => {
             let li = document.createElement("p");
-                li.classList.add("eren__person");
-                li.innerHTML = item.name
+
+            li.classList.add("eren__person");
+            li.innerHTML = item.name;
+
             nav.appendChild(li);
+            
+            document.querySelector(".eren__person").classList.add("person--active");
 
+            // unfortunately, I don't know of another way to replace the content.
+            // I tried to use the .innerHTML property to replace the content, but it didn't work. It just duplicated it.
             li.addEventListener("click", () => {
-                let relationship = erenRelationships[erenRelationships.indexOf(item)];
+                relationship = erenRelationships[erenRelationships.indexOf(item)];
 
-                let div = document.createElement("div"),
-                    relContent = document.createElement("div");
+                document.querySelector(".person--active").classList.remove("person--active");
 
-                div.classList.add("eren__relationship");
-                relContent.classList.add("eren__relationshipContent");
+                li.classList.add("person--active");
+                
+                relContent.innerHTML = "";
 
-                div.innerHTML = `
-                <img src="${relationship.image}" alt="Image of Eren and ${relationship.name}">
-                `
+                div.querySelector("img").src = relationship.image;
+                div.querySelector("img").alt = "Image of Eren and " + relationship.name;
 
-                relationship.content.forEach(item => {
-                    let p = document.createElement("p");
-                    p.innerHTML = item.details;
+                relationship.content.forEach(relDetails => {
+                    let relPara = document.createElement("p");
+                    relPara.innerHTML = relDetails.details;
 
-                    relContent.appendChild(p);
+                    relContent.appendChild(relPara);
                 })
-
-                content.appendChild(div);
+                
+                // reappend the new content
                 div.appendChild(relContent);
             })
         })
-    }) 
 }
 
 function erenKeyMoments() {
-    fetchContent().then(data => {
-        let eren = data.anime["Attack on Titan"].characters["Eren Yeager"],
+        let eren = globalData.anime["Attack on Titan"].characters["Eren Yeager"],
             erenKeyMoments = eren.details["key moments"],
             content = document.querySelector(".eren__content"),
             nav = document.querySelector(".eren__nav--small");
@@ -374,12 +413,10 @@ function erenKeyMoments() {
             content.appendChild(div);
             div.appendChild(keyContent);
         })
-    }) 
 }
 
 function erenSkills() {
-    fetchContent().then(data => {
-        let eren = data.anime["Attack on Titan"].characters["Eren Yeager"],
+        let eren = globalData.anime["Attack on Titan"].characters["Eren Yeager"],
             erenSkills = eren.details["skills"],
             content = document.querySelector(".eren__content"),
             nav = document.querySelector(".eren__nav--small");
@@ -407,12 +444,10 @@ function erenSkills() {
             content.appendChild(div);
             div.appendChild(skillContent);
         })
-    }) 
 }
 
 function erenMore() {
-    fetchContent().then(data => {
-        let eren = data.anime["Attack on Titan"].characters["Eren Yeager"],
+        let eren = globalData.anime["Attack on Titan"].characters["Eren Yeager"],
             erenMore = eren.details["more"],
             content = document.querySelector(".eren__content"),
             nav = document.querySelector(".eren__nav--small");
@@ -430,11 +465,13 @@ function erenMore() {
 
             content.appendChild(div);
         })
-    }) 
 }
 
 async function fetchContent(){
-    const response = await fetch("https://api.npoint.io/9d18e4e8115d2a4fe31f");
+    let fetchLink = "https://api.npoint.io/9d18e4e8115d2a4fe31f";
+
+    const response = await fetch(fetchLink);
     const data = await response.json();
+    globalData = data;
     return data;
 }

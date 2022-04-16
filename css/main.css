@@ -1,5 +1,11 @@
+html {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
 body {
     background-color: #111111;
+    margin: 0 auto;
 }
 
 .stop-scroll {
@@ -12,11 +18,13 @@ body {
     justify-content: center;
     align-items: center;
     width: 90%;
+    max-width: 500px;
     margin: 7% auto;
 }
 
 .nav {
     width: 100%;
+    max-width: 500px;
 }
 
 .nav__list {
@@ -51,12 +59,14 @@ body {
     right: 5%;
     color: white;
     font-family: 'IBM Plex Sans', sans-serif;
+    cursor: pointer;
 }
 
 .nav__icon {
     position: absolute;
     top: 3%;
     right: 5%;
+    cursor: pointer;
 }
 
 .nav__line {
@@ -93,12 +103,12 @@ body {
 
 .nav__logo {
     width: 100%;
+    max-width: 415px;
 }
 
 .home {
     width: 95%;
     margin: 0 auto;
-    max-width: 1400px;
 }
 
 .explore__wrapper {
@@ -198,7 +208,6 @@ body {
 
 .anime__wrapper {
     width: 95%;
-    max-width: 805px;
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
@@ -239,6 +248,7 @@ body {
     background-repeat: no-repeat;
     height: 100vh;
     width: 100vw;
+    max-width: 500px;
     position: fixed;
     top: 0;
     left: 0;
@@ -264,7 +274,6 @@ body {
     text-decoration: none;
     padding: 3% 8% 4%;
     font-family: 'Barlow', sans-serif;
-    font-weight: Bold;
     border-radius: 600px;
 }
 
@@ -272,7 +281,7 @@ body {
     width: 95%;
     margin: 0 auto;
     background-color: rgba(17, 17, 17, 0.8);
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 60vh;
     border-radius: 25px;
 }
@@ -314,6 +323,7 @@ body {
     position: absolute;
     height: 100vh;
     width: 100%;
+    max-width: 500px;
     background-size: cover;
     background-position: center;
     top: 0;
@@ -413,161 +423,266 @@ body {
     display: block;
 }
 
-@media screen and (min-width: 1100px) {
-    .header {
-        width: min(90%, 1407px);
-        flex-direction: row;
-        margin: 2% auto;
-        justify-content: flex-end;
-        gap: 0;
-        flex: 1 0 auto;
-    }
+/* end of characters */
 
-    .header--noLogo { justify-content: space-between; }
+/* start of eren */
 
-    /* .nav__search input {
-        position: absolute;
-        top: 3%;
-        left: 50%;
-        transform: translateX(-50%);
-    } */
+.eren__heroImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 500px;
+    z-index: -1;
+}
 
-    .nav { width: auto; }
+.eren__profile {
+    margin: 45% auto -15%;
+    display: block;
+    width: 150px;
+    clip-path: circle(50%);
+    border: solid 4px #131313;
+    border-radius: 50%;
+}
 
-    .nav__logo {
-        width: 220px;
-    }
+.eren__heroImg img {
+    width: 100%;
+}
 
-    .nav__icon { display: none; }
+.eren__firstName, .eren__lastName {
+    font-family: 'IBM Plex Sans', sans-serif;
+    text-align: center;
+    color: white;
+}
 
-    .nav__close { display: none; }
+.eren__firstName {
+    text-transform: uppercase;
+}
 
-    .nav__list {
-        display: flex;
-        flex-direction: row;
-        position: initial;
-        width: auto;
-        height: auto;
-        background: transparent;
-        gap: 30px;
-    }
+.eren__lastName {
+    font-size: 60px;
+}
 
-    .nav__item a { font-size: 18px; }
+.eren__basicInfo, .eren__wrapper {
+    width: 95%;
+    margin: 8% auto;
+}
 
-    .recent { 
-        width: 86%; 
-        margin: 5% auto;
-        padding-bottom: 0;
-    }
+.eren__basicInfo {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 400px;
+    gap: 13px;
+    justify-content: center;
+}
 
-    .explore h2 { 
-        margin-bottom: 2%;
-        margin-left: 7%; 
-    }
+.eren__info {
+    background-color: #212121;
+    padding: 13px 13% 13px 6%;
+    border-radius: 5px;
+}
 
-    .recent h2 { margin-bottom: 2%; }
+.eren__info h4 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #B3B3B3;
+    letter-spacing: 0.5px;
+    font-size: 18px;
+    margin: 3% 0 5%;
+    text-transform: capitalize;
+}
 
-    .anime {
-        padding: 0;
-        margin: 5% auto;
-    }
+.eren__info p {
+    font-family: 'Barlow', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    color: #E2E2E2;
+}
 
-    .anime__thumbnail:last-child { display: block; }
+.eren__nav {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 95%;
+    margin: 0 auto;
+    gap: 10px;
+    padding-bottom: 5%;
+}
 
-    .anime__wrapper { 
-        gap: 30px; 
-    }
+.eren__nav--small {
+    gap: 0px;
+    margin: 4% auto 2%;
+    padding: 0 0 3% 0;
+}
 
-    .aot__btns {
-        position: absolute;
-        flex-direction: column;
-        right: 5%;
-        text-align: right;
-    }
+.eren__navItem, .eren__person {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #8E8E8E;
+    flex: 1 0 auto;
+    transition: color 0.4s ease-in-out;
+    text-align: center;
+    cursor: pointer;
+}
 
-    .aot__btn {
-        padding: 0;
-        background: transparent;
-        position: relative;
-        font-size: 18px;
-    }
+.navItem--active, .year--active, .person--active {
+    color: white;
+}
 
-    .aot__btn::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        transform: translate(130%, -50%);
-        right: 0;
-        width: 40px;
-        height: 2px;
-        background: rgba(255, 255, 255, 1);
-    }
+.eren__event, .eren__relationship p, .eren__skill p, .eren__keyWrapper, .eren__more {
+    padding: 4%;
+    color: white;
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    line-height: 140%;
+    background-color: #212121;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
 
-    .aot__logo { 
-        width: min(33%, 560px);
-        margin: 0 7%;
-    }
+.eren__event {
+    width: 95%;
+    padding: 4%;
+    color: white;
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    background-color: #212121;
+    margin: 5% auto;
+    border-radius: 5px;
+}
 
-    .aot__content, .characters__wrapper {
-        width: 480px;
-        margin: 2% 5% 0;
+.eren__relationship {
+    position: relative;
+    top: 100px;
+    margin-bottom: 32%;
+}
+
+.eren__relationship img, .eren__keyMoment img {
+    width: 35%;
+    position: absolute;
+    top: -18%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+}
+
+.eren__relationship p {
+    padding: 5% 4%;
+    margin: 5% 0;
+    border-radius: 5px;
+}
+
+.eren__relationship p:first-child {
+    padding-top: 12%;
+}
+
+.eren__skill {
+    width: 95%;
+    margin: 0 auto 7%;
+}
+
+.eren__skill h3, .eren__keyWrapper h3 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 34px;
+    margin: 0 0 4%;
+    color: white;
+    line-height: 110%;
+}
+
+.eren__skill p { padding: 2% 4%; }
+
+.eren__skill p:first-child { padding-top: 4%; }
+.eren__skill p:last-child { padding-bottom: 4%; }
+
+.eren__keyMoment {
+    position: relative;
+    top: 90px;
+    margin-bottom: 30%;
+}
+
+.eren__keyMoment img { top: -25%; }
+
+.eren__keyWrapper {
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.eren__keyWrapper h3 {
+    padding-top: 3%;
+    font-size: 32px;
+}
+
+.eren__keyWrapper p {
+    margin: 4% 0;
+}
+
+.eren__keyWrapper p:last-child { margin-bottom: 0; }
+
+.eren__more {
+    width: 95%;
+    margin: 4% auto;
+    border-radius: 5px;
+}
+
+.eren__more:first-child { margin-top: 0; }
+
+/* end of eren */
+
+/* start of queries */
+@media screen and (min-width: 390px) {
+    .aot__content {
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
 
-    .aot__content, .characters__card {
-        max-height: 540px;
-    }
-
-    .aot__content {
-        height: 65vh;
-    }
-
-    .aot__content p:first-child, .aot__content p:last-child { margin: 0; }
-
     .aot__content p {
-        margin: 6px 0 !important;
+        font-size: 15px;
+    }
+
+    .characters__wrapper { margin-top: -4%; }
+
+    .characters__bio {
+        margin-top: 2%;
         font-size: 16px;
         line-height: 140%;
     }
 
-    .characters__wrapper {
-        margin: -5% 5% 0;
+    .eren__relationship img {
+        top: -90px;
     }
 
-    .characters__card {
-        height: 53vh;
-        width: 90%;
-        margin: 0 auto;
-    }
-
-    .characters__bio {
-        width: 85%;
-        line-height: 135%;
-        font-size: 18px;
-    }
-
-    .characters__readMore a {
-        font-size: 16px;
+    .eren__keyMoment img {
+        top: -100px;
     }
 }
 
-@media screen and (min-width: 1600px) {
-    .aot__content {
-        margin: 2% 8% 0;
-    }
-
+@media screen and (min-width: 410px) {
     .aot__content p {
-        font-size: 17px;
-        line-height: 150%;
-    }
-
-    .characters__wrapper {
-        margin-top: -3%;
+        font-size: 16px;
     }
 
     .characters__bio {
-        width: 90%;
+        width: 83%;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .aot__background, .characters__bck, .eren__heroImg {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media screen and (min-width: 450px) {
+    .eren__relationship img {
+        top: -110px;
+    }
+
+    .eren__keyMoment img {
+        top: -120px;
     }
 }
